@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br><br><br><br><br>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-12">
+            
+            <form method="GET" action="/buscarProducto">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar Producto" id="busqueda" name="busqueda">
+                    <button class="btn btn-warning" type="submit">Buscar</button>
+                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr align="center">
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Tipo Comida</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col" width="250px">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for producto in productos %}
+
+                    <tr align="center">
+                        <th scope="row">{{ producto.id }}</th>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>${{ producto.precio }}</td>
+                        <td>{{ producto.tipo }}</td>
+                        <td><img src="../static/img/productos/{{ producto.imagen }}" class="img-fluid rounded" alt="" width="120px" height="120px"></td>
+                        <td>
+                            <a href="eliminarProducto?id={{producto.id}}" class="btn btn-danger">
+                                <i class="icon-remove icon-white"></i> Eliminar
+                            </a>
+
+                            <a href="editarProducto?id={{producto.id}}" class="btn btn-warning">
+                                <i class="icon-edit icon-white"></i> Modificar
+                            </a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form method="POST" action="/registrarProducto" enctype="multipart/form-data">
+
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="precio">Precio</label>
+                    <input type="text" class="form-control" id="precio" name="precio">
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="imagen">Tipo Comida</label>
+                    <select class="form-select" id="tipo" name="tipo">
+                        <option selected disabled value="0">Selecciona el tipo de comida</option>
+                        <option value="Almuerzo">Almuerzo</option>
+                        <option value="Comida">Comida</option>
+                        <option value="Cena">Cena</option>
+                      </select>
+                </div>
+
+                <br>
+
+                <div>
+                    <label for="imagen">Imagen</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen">
+                </div>
+
+                <br>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit"  class="btn btn-primary">Guardar Registro</button>
+                  </div>
+
+            </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <h1>Editar Producto</h1><br><br>
+
+            <form method="POST" action="/editarProducto" enctype="multipart/form-data">
+
+                <div>
+                    <input type="hidden" class="form-control" id="id" name="id" value="{{ producto.id }}">
+                </div>
+
+                <div>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ producto.nombre }}">
+                </div>
+            
+                <br>
+            
+                <div>
+                    <label for="descripcion">Descripcion</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ producto.descripcion }}">
+                </div>
+            
+                <br>
+            
+                <div>
+                    <label for="precio">Precio</label>
+                    <input type="text" class="form-control" id="precio" name="precio" value="{{ producto.precio }}">
+                </div>
+            
+                <br>
+            
+                <div>
+                    <label for="precio">Tipo de Comida</label>
+                    <select class="form-select" id="tipo" name="tipo">
+                        <option selected disabled value="0">Selecciona el tipo de comida</option>
+
+                        {% if producto.tipo == "Almuerzo" %}
+                            <option value="Almuerzo" selected>Almuerzo</option>
+                        {% else %}
+                            <option value="Almuerzo">Almuerzo</option>
+                        {% endif %}
+
+                        {% if producto.tipo == "Comida" %}
+                            <option value="Comida" selected>Comida</option>
+                        {% else %}
+                            <option value="Comida">Comida</option>
+                        {% endif %}
+
+                        {% if producto.tipo == "Cena" %}
+                            <option value="Cena" selected>Cena</option>
+                        {% else %}
+                            <option value="Cena">Cena</option>
+                        {% endif %}
+                        
+                      </select>
+                </div>
+            
+                <br>
+
+                <div>
+                    <label for="imagen">Imagen</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen">
+                </div>
+
+                <div hidden>
+                    <input class="form-control" type="text" value="{{ producto.imagen }}" id="imagenRes" name="imagenRes" hidden>
+                </div>
+            
+                <br>
+            
+                <div class="modal-footer">
+                    <a href="/profile" class="btn btn-danger">
+                        <i class="icon-remove icon-white"></i> Cancelar
+                    </a> &nbsp;&nbsp;&nbsp;
+                    <button type="submit"  class="btn btn-primary">Guardar Registro</button>
+                </div>
+            
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+{% endblock %}

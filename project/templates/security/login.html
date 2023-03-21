@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br><br><br><br>
+
+
+<!-- Creame un Login con boostrap 5 -->
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12" align="center">
+            <h1>Login</h1>
+        </div>
+
+        <div align="center">
+
+            <br><br>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <div class="row" align="center">
+
+        <form method="POST" action="/security/login">
+
+            <div class="col-4"></div>
+
+            <div class="col-4">
+
+                <input class="form-control" placeholder="Email" type="email" name="email"><br>
+
+                <input class="form-control" type="password" name="password" placeholder="Password"><br>
+
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Recuerdame
+                </label>
+
+                <br><br>
+
+                <button type="submit" class="btn btn-success">Iniciar Sesion</button>
+
+            </div>
+            <div class="col-4"></div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

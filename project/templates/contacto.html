@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br>
+
+<section id="contacto" class="contact">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h2>Contacto</h2>
+        <p>Necesitas algo? <span>Contactanos</span></p>
+      </div>
+
+      <form action="forms/contact.php" method="post" role="form" class="php-email-form p-md-4">
+        <div class="row">
+          <div class="col-xl-6 form-group">
+            <input type="text" name="name" class="form-control" id="name" placeholder="Ingresa tu nombre" required>
+          </div>
+          <div class="col-xl-6 form-group">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Ingresa tu email" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required></textarea>
+        </div>
+        <div class="my-3">
+          <div class="loading">Enviando...</div>
+          <div class="error-message"></div>
+          <div class="sent-message">Tu mensaje fue enviado. Esteremos en contacto!</div>
+        </div>
+        <div class="text-center"><button type="submit">Enviar Mensaje</button></div>
+      </form>
+
+    </div>
+  </section>
+
+
+{% endblock %}
