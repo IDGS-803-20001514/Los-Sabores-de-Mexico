@@ -5,7 +5,7 @@ from . import db
 from . models import Productos
 from werkzeug.utils import secure_filename
 import os
-
+import logging
 
 main = Blueprint('main',__name__)
 

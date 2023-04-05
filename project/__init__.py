@@ -2,7 +2,9 @@ import os
 from flask import Flask
 from flask_security import Security, SQLAlchemyUserDatastore
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import date
+from datetime import datetime
+import logging
 
 db = SQLAlchemy()
 from .models import User, Role
@@ -29,5 +31,10 @@ def create_app():
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    logging.basicConfig(filename='error.log',level=logging.ERROR)
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.ERROR)
+    logging.error('Inicion la aplicacion el dia %s en la hora %s', date.today(), datetime.now().time())
 
     return app

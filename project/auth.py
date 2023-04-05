@@ -5,6 +5,9 @@ from flask_security import login_required
 from flask_security.utils import login_user, logout_user, hash_password, encrypt_password
 from . models import User
 from . import db, userDataStore
+import logging
+from datetime import date
+from datetime import datetime
 
 auth = Blueprint('auth', __name__, url_prefix = '/security')
 
@@ -21,10 +24,16 @@ def login_post():
     user = User.query.filter_by(email = email).first()
 
     if not user or not check_password_hash(user.password, password):
+
+        logging.error('El email: %s intento acceder a la aplicacion en la el dia %s en la hora %s', email, date.today(), datetime.now().time())
+
         flash('El usuario y/o la contraseña son incorrectos')
         return redirect(url_for('auth.login'))
     
     login_user(user, remember = remember)
+
+    logging.error('El email: %s accedio a la aplicacion en la el dia %s en la hora %s', email, date.today(), datetime.now().time())
+
     return redirect(url_for('main.profile'))
 
 @auth.route('/register')
